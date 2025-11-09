@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>비밀번호 관리 사이트 🔐</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1 id="home-title">🔐 나만의 계정 저장소</h1>
+    <nav>
+      <a href="#admin" id="adminLink">관리자페이지</a>
+    </nav>
+  </header>
+
+  <!-- 홈 -->
+  <main id="home">
+    <div class="home-search">
+      <input type="text" placeholder="사이트 이름을 검색하세요 (예: 넷플릭스)" />
+      <button>검색</button>
+    </div>
+  </main>
+
+  <!-- 관리자 페이지 -->
+  <section id="admin" style="display:none">
+    <div class="admin-container">
+      <h2>계정 등록</h2>
+      <form>
+        <input type="text" placeholder="사이트 이름 (ex: 넷플릭스)" required />
+
+        <select id="userSelect" required>
+          <option value="">사용자 이름 선택</option>
+          <option value="민규">민규</option>
+          <option value="윤정">윤정</option>
+        </select>
+
+        <input type="text" placeholder="아이디" required />
+
+        <div class="password-box">
+          <input type="password" id="pwInput" placeholder="비밀번호" required />
+          <span class="toggle-eye" id="togglePw">👁️</span>
+        </div>
+
+        <button class="submit">새로운 아이디 비밀번호 추가</button>
+      </form>
+
+      <div class="history">
+        <p>[히스토리] 계정 등록 시 아래에 표시됩니다</p>
+        <div class="account-list">
+          <strong>등록된 계정 리스트 *</strong>
+          <div>등록된 계정이 없습니다.</div>
+        </div>
+      </div>
+
+      <div class="to-advanced">
+        <button id="goAdvanced" class="submit">고급 관리자 페이지 이동</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 고급 관리자 페이지 -->
+  <section id="advanced" style="display:none">
+    <div class="admin-container">
+      <h2>고급 관리자 페이지</h2>
+
+      <div class="card-list" id="advAccountList">등록된 계정이 없습니다.</div>
+
+      <hr>
+      <h3>사용자 이름 관리</h3>
+      <div class="user-manage">
+        <input type="text" id="newUserName" placeholder="새 사용자 이름 추가" />
+        <button id="addUserBtn" class="submit">추가</button>
+        <div id="userList"></div>
+      </div>
+
+      <!-- ✅ 새로 추가된 버튼 -->
+      <button id="backToAdmin" class="submit">관리자 페이지로 돌아가기</button>
+    </div>
+  </section>
+
+  <!-- 삭제 확인창 -->
+  <div id="confirmBox" class="hidden">
+    <div class="confirm-content">
+      <p>정말 삭제하시겠습니까?</p>
+      <div class="confirm-buttons">
+        <button id="confirmDelete" class="submit" style="background:#ff3b30;">삭제</button>
+        <button id="cancelDelete" class="submit" style="background:#ccc;color:#333;">취소</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

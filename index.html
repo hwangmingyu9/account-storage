@@ -15,6 +15,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- =============================== -->
+  <!-- 🔝 헤더 -->
+  <!-- =============================== -->
   <header>
     <h1 id="home-title">🔐 나만의 계정 저장소</h1>
     <nav>
@@ -22,20 +25,25 @@
     </nav>
   </header>
 
+  <!-- =============================== -->
   <!-- 🏠 홈 -->
+  <!-- =============================== -->
   <main id="home">
     <div class="home-container">
       <div class="home-search">
         <input type="text" placeholder="사이트 이름을 검색하세요 (예: 넷플릭스)" />
         <button>검색</button>
       </div>
-      <!-- ✅ 검색창 아래 이미지 추가 -->
-      <div class="home-image"><img src="accounts_cloud.png" alt="계정 클라우드"></div>
+      <!-- ✅ 검색창 아래 이미지 -->
+      <div class="home-image">
+        <img src="accounts_cloud.png" alt="계정 클라우드">
       </div>
     </div>
   </main>
 
-  <!-- 관리자 페이지 -->
+  <!-- =============================== -->
+  <!-- ⚙️ 관리자 페이지 -->
+  <!-- =============================== -->
   <section id="admin" style="display:none">
     <div class="admin-container">
       <h2>계정 등록</h2>
@@ -72,7 +80,9 @@
     </div>
   </section>
 
-  <!-- 고급 관리자 페이지 -->
+  <!-- =============================== -->
+  <!-- 💾 고급 관리자 페이지 -->
+  <!-- =============================== -->
   <section id="advanced" style="display:none">
     <div class="admin-container">
       <h2>고급 관리자 페이지</h2>
@@ -93,13 +103,37 @@
     </div>
   </section>
 
-  <!-- 삭제 확인창 -->
+  <!-- =============================== -->
+  <!-- ⚠️ 삭제 확인창 -->
+  <!-- =============================== -->
   <div id="confirmBox" class="hidden">
     <div class="confirm-content">
       <p>정말 삭제하시겠습니까?</p>
       <div class="confirm-buttons">
         <button id="confirmDelete" class="submit" style="background:#ff3b30;">삭제</button>
         <button id="cancelDelete" class="submit" style="background:#ccc;color:#333;">취소</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============================== -->
+  <!-- ✏️ 수정 모달 (닫기 X 버튼 포함) -->
+  <!-- =============================== -->
+  <div id="editModal" class="hidden">
+    <div class="edit-box">
+      <div class="edit-header">
+        <h3>계정 수정</h3>
+        <span id="closeEdit" class="close-btn">✖</span>
+      </div>
+
+      <input type="text" id="editSite" placeholder="사이트" />
+      <input type="text" id="editName" placeholder="사용자 이름" />
+      <input type="text" id="editId" placeholder="아이디" />
+      <input type="text" id="editPw" placeholder="패스워드" />
+
+      <div class="edit-buttons">
+        <button id="saveEdit">저장</button>
+        <button id="cancelEdit">취소</button>
       </div>
     </div>
   </div>

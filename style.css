@@ -54,7 +54,9 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 40px;
+
+  /* ⭐ 이 부분으로 상단 여백을 조절할 수 있음 */
+  padding-top: 50px; /* 기본값 40 → 50으로 살짝 내려줌 */
 }
 
 /* ✅ 검색창을 화면 거의 꽉 채우게 */
@@ -125,7 +127,7 @@ main {
 .admin-container {
   width: 92%;
   max-width: 390px;
-  margin: 30px auto;
+  margin: 50px auto; /* ⭐ 여기도 간격 조절 가능 (기존 30px → 50px) */
   background: #fff;
   border-radius: 14px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.08);
@@ -253,7 +255,7 @@ button.submit:hover {
 .card-buttons {
   display: flex;
   flex-direction: column;
-  gap: 8px; /* 🔹 수정/삭제 간격 */
+  gap: 8px;
   margin-top: 10px;
 }
 
@@ -356,6 +358,92 @@ button.submit:hover {
 }
 
 /* ===============================
+   ✏️ 수정 모달 (닫기버튼 포함)
+================================= */
+#editModal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#editModal.hidden {
+  display: none;
+}
+
+.edit-box {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.edit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.edit-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.close-btn {
+  font-size: 20px;
+  cursor: pointer;
+  color: #888;
+  transition: 0.2s;
+}
+
+.close-btn:hover {
+  color: #ff3b30;
+}
+
+.edit-box input {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.edit-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+#saveEdit {
+  background: #0078ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+#cancelEdit {
+  background: #ccc;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* ===============================
    📱 모바일 최적화
 ================================= */
 @media screen and (max-width: 480px) {
@@ -370,7 +458,6 @@ button.submit:hover {
     width: 100%;
   }
 
-  /* ✅ 모바일 전용 이미지 크기 */
   .home-image img {
     max-width: 350px !important;
     width: auto !important;
@@ -386,6 +473,13 @@ button.submit:hover {
     flex-direction: column;
     gap: 6px;
   }
+
+  /* ⭐ 모바일일 때 상단 여백 약간 줄이기 */
+  main, .admin-container, #advanced {
+    margin-top: 40px;
+  }
+}
+
 /* ===============================
    🧩 전체 페이지 여백 & 정렬 통합
 ================================= */
@@ -393,13 +487,12 @@ main,
 .admin-container,
 #advanced {
   width: 100%;
-  max-width: 720px; /* 최대 너비 제한 (넓은 화면에서도 중앙 유지) */
-  margin: 0 auto;   /* 자동 중앙 정렬 */
-  padding: 0 20px;  /* 좌우 여백 일정하게 */
-  box-sizing: border-box; /* padding 포함 계산 */
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
-/* ✅ 모든 내부 요소(입력창, 버튼 등) 균등 정렬 */
 form,
 .home-search,
 .user-manage,
@@ -410,12 +503,11 @@ form,
   margin: 0 auto;
 }
 
-/* ✅ 모바일일 때는 여백 자동 줄이기 */
 @media screen and (max-width: 480px) {
   main,
   .admin-container,
   #advanced {
     max-width: 100%;
-    padding: 0 10px; /* 좌우 여백 줄이기 */
+    padding: 0 10px;
   }
 }

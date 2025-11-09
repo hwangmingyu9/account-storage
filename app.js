@@ -1,7 +1,4 @@
-// ==============================
-// 🔧 기본 설정
-// ==============================
-const SERVER_URL = "https://account-storage-p06t.onrender.com"; // Render 배포 주소로 바꿔
+const SERVER_URL = "https://account-storage-p06t.onrender.com";
 
 const pages = {
   home: document.querySelector("#home"),
@@ -34,38 +31,31 @@ const confirmBox = document.querySelector("#confirmBox");
 const confirmDeleteBtn = document.querySelector("#confirmDelete");
 const cancelDeleteBtn = document.querySelector("#cancelDelete");
 
-let deleteIndex = null;
+const editModal = document.querySelector("#editModal");
+const editSite = document.querySelector("#editSite");
+const editName = document.querySelector("#editName");
+const editId = document.querySelector("#editId");
+const editPw = document.querySelector("#editPw");
+const saveEditBtn = document.querySelector("#saveEdit");
+const cancelEditBtn = document.querySelector("#cancelEdit");
+const closeEditBtn = document.querySelector("#closeEdit");
+
+let editingId = null;
 
 // ==============================
-// 🔄 사용자 이름 관리 (localStorage 유지)
-// ==============================
-const USER_KEY = "userList";
-const getUsers = () => JSON.parse(localStorage.getItem(USER_KEY) || '["민규","윤정"]');
-const saveUsers = (d) => localStorage.setItem(USER_KEY, JSON.stringify(d));
-
-function refreshUserSelect() {
-  const users = getUsers();
-  selectName.innerHTML =
-    '<option value="">사용자 이름 선택</option>' +
-    users.map((u) => `<option value="${u}">${u}</option>`).join("");
-}
-
-// ==============================
-// 📄 페이지 전환
+// 페이지 전환
 // ==============================
 function showPage(page) {
   Object.values(pages).forEach((p) => (p.style.display = "none"));
   pages[page].style.display = "block";
 }
 
-// ✅ 관리자 페이지 이동
 adminLink.addEventListener("click", (e) => {
   e.preventDefault();
   showPage("admin");
   renderAccounts();
 });
 
-// ✅ 고급 관리자 페이지 이동
 goAdvancedBtn.addEventListener("click", (e) => {
   e.preventDefault();
   showPage("advanced");
@@ -73,18 +63,11 @@ goAdvancedBtn.addEventListener("click", (e) => {
   renderUserList();
 });
 
-// ✅ 고급 관리자 → 관리자 페이지로 돌아가기
-backToAdminBtn?.addEventListener("click", () => showPage("admin"));
-
-// ✅ 제목 클릭 시 새로고침
-title.addEventListener("click", () => {
-  document.body.style.transition = "opacity 0.5s ease";
-  document.body.style.opacity = "0";
-  setTimeout(() => window.location.reload(), 500);
-});
+backToAdminBtn.addEventListener("click", () => showPage("admin"));
+title.addEventListener("click", () => location.reload());
 
 // ==============================
-// 👁️ 비밀번호 토글
+// 비밀번호 보기
 // ==============================
 togglePw.addEventListener("click", () => {
   const type = pwInput.getAttribute("type");
@@ -93,7 +76,7 @@ togglePw.addEventListener("click", () => {
 });
 
 // ==============================
-// 💾 계정 등록 (서버 저장)
+// 계정 추가
 // ==============================
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -101,6 +84,7 @@ form.addEventListener("submit", async (e) => {
   const name = selectName.value.trim();
   const id = inputs[1].value.trim();
   const pw = pwInput.value.trim();
+
   if (!site || !name || !id || !pw)
     return alert("모든 항목을 입력하세요.");
 
@@ -110,154 +94,155 @@ form.addEventListener("submit", async (e) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ site, name, id, pw }),
     });
-
     form.reset();
     renderAccounts();
     alert(`${site} 계정이 등록되었습니다 ✅`);
   } catch {
-    alert("❌ 서버에 연결할 수 없습니다.");
+    alert("❌ 서버 연결 실패");
   }
 });
 
 // ==============================
-// 📜 히스토리 (서버에서 불러오기)
+// 계정 목록
 // ==============================
-// ✅ 전체 계정 불러오기 (히스토리용)
 async function renderAccounts() {
-  try {
-    const res = await fetch(`${SERVER_URL}/getAccounts`);
-    const accounts = await res.json();
-
-    const listArea = listContainer.querySelector("div:last-child");
-    listArea.innerHTML = accounts.length
-      ? accounts.map(
-          (acc) => `<div>${acc["02_사이트"]} [${acc["01_사용자이름✅"]}]</div>`
-        ).join("")
-      : "<div>등록된 계정이 없습니다.</div>";
-  } catch {
-    console.error("⚠️ 서버 연결 실패");
-  }
+  const res = await fetch(`${SERVER_URL}/getAccounts`);
+  const data = await res.json();
+  const list = listContainer.querySelector("div:last-child");
+  list.innerHTML = data.length
+    ? data.map((a) => `<div>${a["02_사이트"]} [${a["01_사용자이름✅"]}]</div>`).join("")
+    : "<div>등록된 계정이 없습니다.</div>";
 }
 
-// ✅ 고급 관리자용 카드 리스트
 async function renderAdvList() {
-  try {
-    const res = await fetch(`${SERVER_URL}/getAccounts`);
-    const accounts = await res.json();
-
-    advList.innerHTML = accounts.length
-      ? accounts.map(
-          (acc) => `
+  const res = await fetch(`${SERVER_URL}/getAccounts`);
+  const data = await res.json();
+  advList.innerHTML = data.length
+    ? data.map(
+        (a) => `
         <div class="account-card">
-          <h4>${acc["02_사이트"]}</h4>
-          <p><b>사용자:</b> ${acc["01_사용자이름✅"]}</p>
-          <p><b>아이디:</b> ${acc["03_아이디"]}</p>
-          <p><b>비밀번호:</b> ${acc["04_패스워드"]}</p>
+          <h4>${a["02_사이트"]}</h4>
+          <p><b>사용자:</b> ${a["01_사용자이름✅"]}</p>
+          <p><b>아이디:</b> ${a["03_아이디"]}</p>
+          <p><b>비밀번호:</b> ${a["04_패스워드"]}</p>
           <div class="card-buttons">
-            <button class="submit" onclick="editAccount('${acc.id}')">수정</button>
-            <button class="submit" style="background:#ff3b30" onclick="confirmDelete('${acc.id}')">삭제</button>
+            <button class="submit" onclick="editAccount('${a.id}')">수정</button>
+            <button class="submit" style="background:#ff3b30" onclick="confirmDelete('${a.id}')">삭제</button>
           </div>
         </div>`
-        ).join("")
-      : "<div>등록된 계정이 없습니다.</div>";
-  } catch {
-    advList.innerHTML = "<div>❌ 서버 연결 실패</div>";
-  }
+      ).join("")
+    : "<div>등록된 계정이 없습니다.</div>";
 }
 
 // ==============================
-// 🗑️ 삭제 확인창
+// 계정 삭제
 // ==============================
-window.confirmDelete = async (id) => {
-  const confirmContent = confirmBox.querySelector(".confirm-content p");
-  confirmContent.textContent = "등록된 계정을 삭제하시겠습니까?";
+window.confirmDelete = (id) => {
   confirmBox.classList.remove("hidden");
-
   confirmDeleteBtn.onclick = async () => {
-    try {
-      await fetch(`${SERVER_URL}/deleteAccount/${id}`, { method: "DELETE" });
-      alert("✅ 계정이 정상적으로 삭제되었습니다");
-      confirmBox.classList.add("hidden");
-      renderAdvList();
-      renderAccounts();
-    } catch {
-      alert("❌ 삭제 실패 (서버 오류)");
-    }
-  };
-
-  cancelDeleteBtn.onclick = () => {
+    await fetch(`${SERVER_URL}/deleteAccount/${id}`, { method: "DELETE" });
+    alert("✅ 삭제 완료");
     confirmBox.classList.add("hidden");
-    alert("삭제가 취소되었습니다 ❌");
+    renderAdvList();
+    renderAccounts();
   };
+  cancelDeleteBtn.onclick = () => confirmBox.classList.add("hidden");
 };
 
 // ==============================
-// ✏️ 수정 기능 (수정 후 저장)
+// 수정
 // ==============================
-window.editAccount = (id) => {
-  alert("현재 버전에서는 수정 기능이 준비 중입니다.");
+window.editAccount = async (id) => {
+  const res = await fetch(`${SERVER_URL}/getAccounts`);
+  const data = await res.json();
+  const t = data.find((a) => a.id === id);
+  if (!t) return alert("❌ 찾을 수 없음");
+  editSite.value = t["02_사이트"];
+  editName.value = t["01_사용자이름✅"];
+  editId.value = t["03_아이디"];
+  editPw.value = t["04_패스워드"];
+  editingId = id;
+  editModal.classList.remove("hidden");
 };
 
-// ==============================
-// 👤 사용자 관리 (LocalStorage)
-// ==============================
-function renderUserList() {
-  const users = getUsers();
-  userListDiv.innerHTML = users
-    .map(
-      (u, i) => `
-        <div class="user-item">
-          <span class="user-name">${u}</span>
-          <button class="delete-btn" onclick="deleteUser(${i})">삭제</button>
-        </div>`
-    )
-    .join("");
-}
-
-addUserBtn.addEventListener("click", () => {
-  const val = newUserInput.value.trim();
-  if (!val) return;
-  const users = getUsers();
-  users.push(val);
-  saveUsers(users);
-  newUserInput.value = "";
-  renderUserList();
-  refreshUserSelect();
+saveEditBtn.addEventListener("click", async () => {
+  const site = editSite.value.trim();
+  const name = editName.value.trim();
+  const id = editId.value.trim();
+  const pw = editPw.value.trim();
+  await fetch(`${SERVER_URL}/updateAccount/${editingId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ site, name, id, pw }),
+  });
+  alert("✅ 수정 완료");
+  editModal.classList.add("hidden");
+  renderAdvList();
 });
 
-window.deleteUser = (i) => {
-  const users = getUsers();
-  const userName = users[i];
-  const confirmDelete = confirm(`정말 '${userName}' 사용자를 삭제하시겠습니까?`);
-  if (confirmDelete) {
-    users.splice(i, 1);
-    saveUsers(users);
-    renderUserList();
-    refreshUserSelect();
-    alert(`'${userName}' 정상적으로 삭제되었습니다 ✅`);
-  } else alert("삭제가 취소되었습니다 ❌");
+cancelEditBtn.addEventListener("click", () => editModal.classList.add("hidden"));
+closeEditBtn.addEventListener("click", () => editModal.classList.add("hidden"));
+
+// ==============================
+// 사용자 관리 (DB 연동)
+// ==============================
+addUserBtn.addEventListener("click", async () => {
+  const name = newUserInput.value.trim();
+  if (!name) return alert("이름을 입력하세요.");
+  await fetch(`${SERVER_URL}/addUser`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      "등록된 사용자 ✅": true,
+      이름: name,
+    }),
+  });
+  alert(`✅ '${name}' 등록됨`);
+  newUserInput.value = "";
+  renderUserList();
+});
+
+async function renderUserList() {
+  const res = await fetch(`${SERVER_URL}/getUsers`);
+  const users = await res.json();
+  userListDiv.innerHTML = users.length
+    ? users
+        .map(
+          (u) => `
+      <div class="user-item">
+        <span>${u["이름"]}</span>
+        <button class="delete-btn" onclick="deleteUser('${u.id}')">삭제</button>
+      </div>`
+        )
+        .join("")
+    : "<div>등록된 사용자가 없습니다.</div>";
+}
+
+window.deleteUser = async (id) => {
+  await fetch(`${SERVER_URL}/deleteUser/${id}`, { method: "DELETE" });
+  alert("✅ 삭제 완료");
+  renderUserList();
 };
 
 // ==============================
-// 🔍 검색
+// 검색
 // ==============================
 searchButton.addEventListener("click", async () => {
-  const query = searchInput.value.trim();
-  if (!query) return alert("검색어를 입력하세요.");
-
+  const q = searchInput.value.trim();
+  if (!q) return alert("검색어를 입력하세요.");
   const res = await fetch(`${SERVER_URL}/getAccounts`);
-  const accounts = await res.json();
-  const found = accounts.filter((acc) => acc.site.includes(query));
-
-  if (!found.length) return alert(`'${query}' 관련 계정이 없습니다.`);
+  const data = await res.json();
+  const found = data.filter((a) => (a["02_사이트"] || "").includes(q));
+  if (!found.length) return alert(`'${q}' 관련 없음`);
   alert(
     found
       .map(
-        (acc) =>
-          `사이트: ${acc.site}\n이름: ${acc.name}\n아이디: ${acc.id}\n비밀번호: ${acc.pw}`
+        (a) =>
+          `사이트: ${a["02_사이트"]}\n이름: ${a["01_사용자이름✅"]}\n아이디: ${a["03_아이디"]}\n비밀번호: ${a["04_패스워드"]}`
       )
       .join("\n\n")
   );
 });
 
-refreshUserSelect();
+renderUserList();
+renderAccounts();

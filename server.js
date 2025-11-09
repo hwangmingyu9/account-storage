@@ -13,7 +13,8 @@ import {
   addDoc,
   getDocs,
   deleteDoc,
-  doc
+  doc,
+  updateDoc
 } from "firebase/firestore";
 
 // ==============================
@@ -41,21 +42,24 @@ const firebaseConfig = {
 
 const fbApp = initializeApp(firebaseConfig);
 const db = getFirestore(fbApp);
-const COLLECTION_NAME = "계정_정보"; // ✅ 저장될 컬렉션 이름
+
+// 🔹 컬렉션 이름들
+const ACCOUNTS = "계정_정보";
+const USERS = "계정_사용자";
 
 // ==============================
-// 🧾 API: 계정 등록
+// 💾 계정 등록
 // ==============================
 app.post("/addAccount", async (req, res) => {
   try {
     const { site, name, id, pw } = req.body;
-    await addDoc(collection(db, COLLECTION_NAME), {
+    await addDoc(collection(db, ACCOUNTS), {
       "01_사용자이름✅": name,
       "02_사이트": site,
       "03_아이디": id,
       "04_패스워드": pw,
     });
-    res.json({ success: true, message: "✅ 계정이 정상적으로 저장되었습니다." });
+    res.json({ success: true, message: "✅ 계정 저장 완료" });
   } catch (e) {
     console.error("❌ 저장 실패:", e);
     res.status(500).json({ error: "저장 실패" });
@@ -63,15 +67,12 @@ app.post("/addAccount", async (req, res) => {
 });
 
 // ==============================
-// 📋 API: 전체 계정 불러오기
+// 📋 계정 목록 불러오기
 // ==============================
 app.get("/getAccounts", async (req, res) => {
   try {
-    const snapshot = await getDocs(collection(db, COLLECTION_NAME));
-    const data = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+    const snap = await getDocs(collection(db, ACCOUNTS));
+    const data = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
     res.json(data);
   } catch (e) {
     console.error("❌ 불러오기 실패:", e);
@@ -80,12 +81,31 @@ app.get("/getAccounts", async (req, res) => {
 });
 
 // ==============================
-// 🗑️ API: 계정 삭제
+// ✏️ 계정 수정
+// ==============================
+app.put("/updateAccount/:id", async (req, res) => {
+  try {
+    const { site, name, id, pw } = req.body;
+    await updateDoc(doc(db, ACCOUNTS, req.params.id), {
+      "01_사용자이름✅": name,
+      "02_사이트": site,
+      "03_아이디": id,
+      "04_패스워드": pw,
+    });
+    res.json({ success: true, message: "✅ 수정 완료" });
+  } catch (e) {
+    console.error("❌ 수정 실패:", e);
+    res.status(500).json({ error: "수정 실패" });
+  }
+});
+
+// ==============================
+// 🗑️ 계정 삭제
 // ==============================
 app.delete("/deleteAccount/:id", async (req, res) => {
   try {
-    await deleteDoc(doc(db, COLLECTION_NAME, req.params.id));
-    res.json({ success: true, message: "✅ 계정이 삭제되었습니다." });
+    await deleteDoc(doc(db, ACCOUNTS, req.params.id));
+    res.json({ success: true, message: "✅ 계정 삭제 완료" });
   } catch (e) {
     console.error("❌ 삭제 실패:", e);
     res.status(500).json({ error: "삭제 실패" });
@@ -93,7 +113,51 @@ app.delete("/deleteAccount/:id", async (req, res) => {
 });
 
 // ==============================
-// 🏠 index.html 서빙 (Render용)
+// 👤 사용자 추가 (계정_사용자 컬렉션)
+// ==============================
+app.post("/addUser", async (req, res) => {
+  try {
+    const { 이름 } = req.body;
+    await addDoc(collection(db, USERS), {
+      "등록된 사용자 ✅": true,
+      이름,
+    });
+    res.json({ success: true, message: "✅ 사용자 등록 완료" });
+  } catch (e) {
+    console.error("❌ 사용자 추가 실패:", e);
+    res.status(500).json({ error: "등록 실패" });
+  }
+});
+
+// ==============================
+// 📜 사용자 목록 불러오기
+// ==============================
+app.get("/getUsers", async (req, res) => {
+  try {
+    const snap = await getDocs(collection(db, USERS));
+    const data = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    res.json(data);
+  } catch (e) {
+    console.error("❌ 사용자 목록 불러오기 실패:", e);
+    res.status(500).json({ error: "불러오기 실패" });
+  }
+});
+
+// ==============================
+// 🗑️ 사용자 삭제
+// ==============================
+app.delete("/deleteUser/:id", async (req, res) => {
+  try {
+    await deleteDoc(doc(db, USERS, req.params.id));
+    res.json({ success: true, message: "✅ 사용자 삭제 완료" });
+  } catch (e) {
+    console.error("❌ 사용자 삭제 실패:", e);
+    res.status(500).json({ error: "삭제 실패" });
+  }
+});
+
+// ==============================
+// 🏠 index.html 서빙
 // ==============================
 app.use(express.static(__dirname));
 app.get("/", (req, res) => {
@@ -104,5 +168,5 @@ app.get("/", (req, res) => {
 // 🚀 Render 서버 시작
 // ==============================
 app.listen(process.env.PORT || 3000, () => {
-  console.log("✅ account-storage 서버 실행 중 (컬렉션: 계정_정보)");
+  console.log("✅ account-storage 서버 실행 중 (컬렉션: 계정_정보 + 계정_사용자)");
 });

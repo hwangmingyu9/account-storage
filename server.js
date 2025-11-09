@@ -1,6 +1,11 @@
+// ==============================
+// 🚀 account-storage 서버 (Render + Firebase 완전버전)
+// ==============================
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
+import path from "path";
+import { fileURLToPath } from "url";
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
@@ -11,11 +16,20 @@ import {
   doc
 } from "firebase/firestore";
 
+// ==============================
+// ⚙️ 기본 설정
+// ==============================
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// ✅ Firebase 연결
+// ✅ Render용 경로 설정 (index.html 제공)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// ==============================
+// 🔥 Firebase 연결
+// ==============================
 const firebaseConfig = {
   apiKey: "AIzaSyA-Nh8kunTjGncNwJmwzPwhxR2Py8LLWEo",
   authDomain: "account-storage-77627.firebaseapp.com",
@@ -27,10 +41,11 @@ const firebaseConfig = {
 
 const fbApp = initializeApp(firebaseConfig);
 const db = getFirestore(fbApp);
+const COLLECTION_NAME = "계정_정보"; // ✅ 저장될 컬렉션 이름
 
-const COLLECTION_NAME = "계정_정보"; // ✅ 새 컬렉션 이름
-
-// ✅ 계정 등록
+// ==============================
+// 🧾 API: 계정 등록
+// ==============================
 app.post("/addAccount", async (req, res) => {
   try {
     const { site, name, id, pw } = req.body;
@@ -47,7 +62,9 @@ app.post("/addAccount", async (req, res) => {
   }
 });
 
-// ✅ 전체 계정 불러오기
+// ==============================
+// 📋 API: 전체 계정 불러오기
+// ==============================
 app.get("/getAccounts", async (req, res) => {
   try {
     const snapshot = await getDocs(collection(db, COLLECTION_NAME));
@@ -62,7 +79,9 @@ app.get("/getAccounts", async (req, res) => {
   }
 });
 
-// ✅ 계정 삭제
+// ==============================
+// 🗑️ API: 계정 삭제
+// ==============================
 app.delete("/deleteAccount/:id", async (req, res) => {
   try {
     await deleteDoc(doc(db, COLLECTION_NAME, req.params.id));
@@ -73,7 +92,17 @@ app.delete("/deleteAccount/:id", async (req, res) => {
   }
 });
 
-// ✅ Render 환경 포트 대응
-app.listen(process.env.PORT || 3000, () =>
-  console.log("✅ account-storage 서버 실행 중 (컬렉션: 계정_정보)")
-);
+// ==============================
+// 🏠 index.html 서빙 (Render용)
+// ==============================
+app.use(express.static(__dirname));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+// ==============================
+// 🚀 Render 서버 시작
+// ==============================
+app.listen(process.env.PORT || 3000, () => {
+  console.log("✅ account-storage 서버 실행 중 (컬렉션: 계정_정보)");
+});

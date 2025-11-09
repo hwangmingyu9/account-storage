@@ -54,9 +54,7 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-
-  /* ⭐ 이 부분으로 상단 여백을 조절할 수 있음 */
-  padding-top: 50px; /* 기본값 40 → 50으로 살짝 내려줌 */
+  padding-top: 50px; /* ⭐ PC용 기본 상단 여백 */
 }
 
 /* ✅ 검색창을 화면 거의 꽉 채우게 */
@@ -67,7 +65,7 @@ main {
   align-items: center;
   background: #fff;
   border: 1px solid #ddd;
-  border-radius: 10px;
+  border-radius: 8px; /* 🔹 각진 모서리 */
   padding: 20px 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   width: 95%;
@@ -78,9 +76,9 @@ main {
 .home-search input {
   flex: 1;
   font-size: 16px;
-  padding: 12px;
+  padding: 14px;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 6px;
   outline: none;
 }
 
@@ -92,8 +90,8 @@ main {
   background: #0078ff;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  padding: 12px 20px;
+  border-radius: 6px;
+  padding: 14px 20px;
   font-size: 16px;
   cursor: pointer;
   transition: 0.2s;
@@ -105,7 +103,7 @@ main {
 
 /* ✅ 이미지 중앙 정렬 */
 .home-image {
-  margin-top: 30px;
+  margin-top: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -113,9 +111,9 @@ main {
 }
 
 .home-image img {
-  max-width: 500px; /* PC용 크기 */
+  max-width: 500px;
   width: 100%;
-  border-radius: 12px;
+  border-radius: 8px; /* 🔹 각진 이미지 */
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
   display: block;
   margin: 0 auto;
@@ -125,13 +123,13 @@ main {
    ⚙️ 관리자 / 고급 관리자 공통
 ================================= */
 .admin-container {
-  width: 92%;
-  max-width: 390px;
-  margin: 50px auto; /* ⭐ 여기도 간격 조절 가능 (기존 30px → 50px) */
+  width: 94%;
+  max-width: 420px;
+  margin: 55px auto; /* 🔹 박스 전체를 아래로 살짝 내림 */
   background: #fff;
-  border-radius: 14px;
+  border-radius: 0; /* 🔹 각지게 변경 */
   box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-  padding: 25px 20px;
+  padding: 35px 25px; /* 🔹 내부 공간 여유 */
 }
 
 .admin-container h2 {
@@ -139,7 +137,7 @@ main {
   color: #ff0000;
   text-align: center;
   font-size: 20px;
-  margin-bottom: 15px;
+  margin-bottom: 20px; /* 🔹 제목 아래 여백 */
 }
 
 /* ===============================
@@ -148,7 +146,7 @@ main {
 form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px; /* 🔹 항목 간격 확대 */
 }
 
 input, button, select {
@@ -159,8 +157,8 @@ input[type="text"],
 input[type="password"],
 select {
   border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 12px;
+  border-radius: 6px;
+  padding: 13px;
   font-size: 15px;
   width: 100%;
   box-sizing: border-box;
@@ -176,8 +174,8 @@ button.submit {
   background: #2d3f54;
   color: white;
   border: none;
-  border-radius: 8px;
-  padding: 12px;
+  border-radius: 6px;
+  padding: 13px;
   font-size: 15px;
   cursor: pointer;
   transition: 0.2s;
@@ -240,7 +238,7 @@ button.submit:hover {
 ================================= */
 .account-card {
   background: #fff;
-  border-radius: 10px;
+  border-radius: 6px; /* 🔹 각진 카드 */
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   padding: 15px;
   margin-bottom: 15px;
@@ -325,7 +323,7 @@ button.submit:hover {
 .confirm-content {
   background: #fff;
   padding: 25px;
-  border-radius: 10px;
+  border-radius: 6px;
   width: 80%;
   max-width: 320px;
   text-align: center;
@@ -377,7 +375,7 @@ button.submit:hover {
 .edit-box {
   background: #fff;
   padding: 25px;
-  border-radius: 12px;
+  border-radius: 6px;
   width: 90%;
   max-width: 380px;
   text-align: center;
@@ -415,7 +413,7 @@ button.submit:hover {
   margin-bottom: 12px;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 6px;
   font-size: 15px;
 }
 
@@ -429,7 +427,7 @@ button.submit:hover {
   background: #0078ff;
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 10px 20px;
   cursor: pointer;
 }
@@ -438,7 +436,7 @@ button.submit:hover {
   background: #ccc;
   color: #333;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 10px 20px;
   cursor: pointer;
 }
@@ -447,47 +445,47 @@ button.submit:hover {
    📱 모바일 최적화
 ================================= */
 @media screen and (max-width: 480px) {
+  /* 홈 검색창 */
   .home-search {
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     width: 92%;
     max-width: none;
+    border-radius: 6px;
   }
 
   .home-search input {
     width: 100%;
+    padding: 13px;
+  }
+
+  /* 이미지 위로 살짝 올리기 */
+  .home-image {
+    margin-top: 10px;
   }
 
   .home-image img {
-    max-width: 350px !important;
+    max-width: 340px !important;
     width: auto !important;
     margin: 0 auto !important;
   }
 
-  .user-item {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  #userList {
-    flex-direction: column;
-    gap: 6px;
-  }
-
+  /* 전체를 조금 더 아래로 */
   body {
-    padding-top: 15px; /* 🔹 전체를 조금만 아래로 내림 */
+    padding-top: 18px;
   }
 
   main,
   .admin-container,
   #advanced {
-    margin-top: 20px; /* 🔹 홈, 관리자, 고급관리자 페이지 여백 */
+    margin-top: 25px;
   }
-}
 
-  /* ⭐ 모바일일 때 상단 여백 약간 줄이기 */
-  main, .admin-container, #advanced {
-    margin-top: 17px;
+  /* 관리자 박스 여백 및 크기 조절 */
+  .admin-container {
+    padding: 30px 18px;
+    border-radius: 0;
+    max-width: 95%;
   }
 }
 
@@ -512,13 +510,4 @@ form,
   width: 100%;
   box-sizing: border-box;
   margin: 0 auto;
-}
-
-@media screen and (max-width: 480px) {
-  main,
-  .admin-container,
-  #advanced {
-    max-width: 100%;
-    padding: 0 10px;
-  }
 }

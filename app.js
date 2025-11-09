@@ -122,6 +122,7 @@ form.addEventListener("submit", async (e) => {
 // ==============================
 // 📜 히스토리 (서버에서 불러오기)
 // ==============================
+// ✅ 전체 계정 불러오기 (히스토리용)
 async function renderAccounts() {
   try {
     const res = await fetch(`${SERVER_URL}/getAccounts`);
@@ -129,37 +130,35 @@ async function renderAccounts() {
 
     const listArea = listContainer.querySelector("div:last-child");
     listArea.innerHTML = accounts.length
-      ? accounts.map((acc) => `<div>${acc.site} [${acc.name}]</div>`).join("")
+      ? accounts.map(
+          (acc) => `<div>${acc["02_사이트"]} [${acc["01_사용자이름✅"]}]</div>`
+        ).join("")
       : "<div>등록된 계정이 없습니다.</div>";
   } catch {
     console.error("⚠️ 서버 연결 실패");
   }
 }
 
-// ==============================
-// 💳 고급 관리자 (카드형 리스트)
-// ==============================
+// ✅ 고급 관리자용 카드 리스트
 async function renderAdvList() {
   try {
     const res = await fetch(`${SERVER_URL}/getAccounts`);
     const accounts = await res.json();
 
     advList.innerHTML = accounts.length
-      ? accounts
-          .map(
-            (acc) => `
+      ? accounts.map(
+          (acc) => `
         <div class="account-card">
-          <h4>${acc.site}</h4>
-          <p><b>사용자:</b> ${acc.name}</p>
-          <p><b>아이디:</b> ${acc.id}</p>
-          <p><b>비밀번호:</b> ${acc.pw}</p>
+          <h4>${acc["02_사이트"]}</h4>
+          <p><b>사용자:</b> ${acc["01_사용자이름✅"]}</p>
+          <p><b>아이디:</b> ${acc["03_아이디"]}</p>
+          <p><b>비밀번호:</b> ${acc["04_패스워드"]}</p>
           <div class="card-buttons">
             <button class="submit" onclick="editAccount('${acc.id}')">수정</button>
             <button class="submit" style="background:#ff3b30" onclick="confirmDelete('${acc.id}')">삭제</button>
           </div>
         </div>`
-          )
-          .join("")
+        ).join("")
       : "<div>등록된 계정이 없습니다.</div>";
   } catch {
     advList.innerHTML = "<div>❌ 서버 연결 실패</div>";

@@ -475,7 +475,7 @@ button.submit:hover {
   }
 
   body {
-    padding-top: 2px; /* 🔹 전체를 조금만 아래로 내림 */
+    padding-top: 5px; /* 🔹 전체를 조금만 아래로 내림 */
   }
 
   main,
@@ -487,7 +487,7 @@ button.submit:hover {
 
   /* ⭐ 모바일일 때 상단 여백 약간 줄이기 */
   main, .admin-container, #advanced {
-    margin-top: 2px;
+    margin-top: 5px;
   }
 }
 

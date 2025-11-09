@@ -111,7 +111,7 @@ main {
 }
 
 .home-image img {
-  max-width: 220px;
+  max-width: 500px;
   width: 100%;
   border-radius: 12px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
@@ -346,6 +346,13 @@ button.submit:hover {
 #cancelDelete {
   background: #ccc;
   color: #333;
+}
+
+.card-buttons {
+  display: flex;
+  flex-direction: column; /* 위아래 배치 */
+  gap: 5px;               /* 🔹 버튼 사이 간격 추가 (원하면 10~12px도 가능) */
+  margin-top: 10px;
 }
 
 /* ===============================

@@ -27,7 +27,6 @@ header {
   z-index: 10;
 }
 
-/* ✅ 메뉴 오른쪽 정렬 */
 nav {
   margin-left: auto;
 }
@@ -47,7 +46,7 @@ nav a {
 }
 
 /* ===============================
-   🏠 홈 페이지 + 검색창
+   🏠 홈 페이지 + 검색창 + 이미지
 ================================= */
 main {
   flex: 1;
@@ -55,18 +54,18 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 30px;
+  padding-top: 40px;
 }
 
 .home-search {
   display: flex;
-  gap: 1px;
+  gap: 8px;
   justify-content: center;
   align-items: center;
   background: #fff;
   border: 1px solid #ddd;
-  border-radius: 1px;
-  padding: 20px 15px;
+  border-radius: 10px;
+  padding: 18px 15px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   width: 100%;
   max-width: 380px;
@@ -90,7 +89,7 @@ main {
   color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 10px 10px;
+  padding: 10px 14px;
   font-size: 15px;
   cursor: pointer;
   transition: 0.2s;
@@ -100,8 +99,20 @@ main {
   background: #005fcc;
 }
 
+/* ✅ 홈 이미지 추가 */
+.home-image {
+  margin-top: 25px;
+  text-align: center;
+}
+.home-image img {
+  max-width: 250px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
 /* ===============================
-   ⚙️ 관리자 / 고급 관리자 공통 컨테이너
+   ⚙️ 관리자 / 고급 관리자 공통
 ================================= */
 .admin-container {
   width: 92%;
@@ -122,7 +133,7 @@ main {
 }
 
 /* ===============================
-   📋 입력 폼 & 공통 버튼 스타일
+   📋 입력 폼 & 버튼
 ================================= */
 form {
   display: flex;
@@ -151,7 +162,6 @@ select:focus {
   border-color: #0078ff;
 }
 
-/* 🔘 기본 버튼 */
 button.submit {
   background: #2d3f54;
   color: white;
@@ -215,20 +225,9 @@ button.submit:hover {
   flex-wrap: wrap;
 }
 
-.account-list strong {
-  display: block;
-  margin-bottom: 8px;
-  color: #444;
-  text-align: center;
-}
-
 /* ===============================
-   💾 고급 관리자 페이지 (카드형)
+   💾 고급 관리자 (카드형)
 ================================= */
-.card-list {
-  margin-top: 15px;
-}
-
 .account-card {
   background: #fff;
   border-radius: 10px;
@@ -243,32 +242,20 @@ button.submit:hover {
   font-size: 16px;
 }
 
-.account-card p {
-  margin: 3px 0;
-  font-size: 14px;
-}
-
-.card-buttons {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-}
-
 /* ===============================
-   👤 사용자 이름 관리 섹션
+   👤 사용자 관리
 ================================= */
 .user-manage {
   margin-top: 20px;
   display: flex;
-  flex-direction: column; /* 세로로 쌓이게 */
+  flex-direction: column;
   align-items: stretch;
   gap: 6px;
 }
 
-.user-manage div {
+.user-item {
   display: flex;
-  flex-direction: row; /* 이름-삭제 가로 배치 */
-  justify-content: space-between; /* 이름 왼쪽 / 삭제 오른쪽 */
+  justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #eee;
   padding: 8px 6px;
@@ -277,38 +264,25 @@ button.submit:hover {
   box-sizing: border-box;
 }
 
-/* 🔹 삭제 버튼 */
-.user-manage div button {
+.user-item button.delete-btn {
   background: #ff3b30;
   color: white;
   border: none;
   border-radius: 6px;
-  padding: 5px 16px;
+  padding: 5px 12px;
   font-size: 13px;
   cursor: pointer;
   transition: 0.2s;
-  min-width: 50px; /* 🔹 최소 너비 (원하면 더 줄여도 됨) */
 }
 
-.user-manage div button:hover {
+.user-item button.delete-btn:hover {
   background: #2d3f54;
 }
 
-/* 🔹 추가 버튼 */
-.user-manage button#addUserBtn {
-  padding: 7px 10px;
-  border: none;
-  border-radius: 8px;
-  background: #ff0303;
-  color: #fff;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.2s ease;
-  width: 100%;
-}
-
-.user-manage button#addUserBtn:active {
-  background: #2d3f54;
+#userList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 /* ===============================
@@ -367,93 +341,23 @@ button.submit:hover {
 }
 
 /* ===============================
-   📱 모바일 최적화 (390×844)
+   📱 모바일 최적화
 ================================= */
-@media screen and (max-width: 400px) {
-  header {
+@media screen and (max-width: 480px) {
+  .home-search {
     flex-direction: column;
-    align-items: center;
     gap: 8px;
   }
 
-  header h1 {
-    font-size: 30px;
+  .user-item {
+    flex-direction: row;
+    justify-content: space-between;
   }
 
-  nav a {
-    font-size: 14px;
+  #userList {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
   }
-
-  .admin-container {
-    width: 90%;
-    padding: 20px 18px;
-  }
-
-  input[type="text"],
-  input[type="password"],
-  select,
-  button.submit {
-    font-size: 11px;
-    padding: 7px;
-  }
-
-  .account-card {
-    padding: 12px;
-  }
-
-  .account-card h4 {
-    font-size: 15px;
-  }
-
-/* ✅ 삭제 버튼만 따로 조정 */
-.user-manage div button.submit {
-  width: auto !important;  /* 전체 버튼 100% 적용 무시 */
-  padding: 4px 10px;       /* 삭제 버튼 크기 줄이기 */
-  min-width: 70px;         /* 최소 길이 (필요시 조정 가능) */
-  font-size: 13px;
 }
-
-/* ✅ 사용자 이름 줄 세로 정렬 고정 */
-.user-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #eee;
-  padding: 8px 6px;
-  font-size: 15px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* ✅ 삭제 버튼 */
-.user-item button.delete-btn {
-  background: #ff3b30;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 5px 12px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.user-item button.delete-btn:hover {
-  background: #2d3f54;
-}
-
-/* ✅ 사용자 리스트 전체 세로 정렬 강제 */
-#userList {
-  display: flex;
-  flex-direction: column; /* 이름 줄이 아래로 쌓이게 */
-  gap: 6px;               /* 줄 간격 */
-  width: 100%;
-}
-
-/* ✅ 추가 버튼과 아래 버튼 간격 조정 */
-#addUserBtn {
-  margin-bottom: -10px; /* 🔹 숫자를 줄이면 간격이 좁아짐 */
-}
-
-
-
-

@@ -474,6 +474,17 @@ button.submit:hover {
     gap: 6px;
   }
 
+  body {
+    padding-top: 25px; /* 🔹 전체를 조금만 아래로 내림 */
+  }
+
+  main,
+  .admin-container,
+  #advanced {
+    margin-top: 20px; /* 🔹 홈, 관리자, 고급관리자 페이지 여백 */
+  }
+}
+
   /* ⭐ 모바일일 때 상단 여백 약간 줄이기 */
   main, .admin-container, #advanced {
     margin-top: 40px;

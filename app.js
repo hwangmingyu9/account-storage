@@ -99,7 +99,7 @@ form.addEventListener("submit", async (e) => {
     });
     form.reset();
     renderAccounts();
-    alert(`${site} 계정이 정상적으로 등록되었습니다 ✅`);
+    alert(`${site} 계정이 등록되었습니다 ✅`);
   } catch {
     alert("❌ 서버 연결 실패");
   }

@@ -111,7 +111,7 @@ main {
 }
 
 .home-image img {
-  max-width: 500px;
+  max-width: 500px; /* PC용 크기 */
   width: 100%;
   border-radius: 12px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
@@ -250,6 +250,13 @@ button.submit:hover {
   font-size: 16px;
 }
 
+.card-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* 🔹 수정/삭제 간격 */
+  margin-top: 10px;
+}
+
 /* ===============================
    👤 사용자 관리
 ================================= */
@@ -348,13 +355,6 @@ button.submit:hover {
   color: #333;
 }
 
-.card-buttons {
-  display: flex;
-  flex-direction: column; /* 위아래 배치 */
-  gap: 5px;               /* 🔹 버튼 사이 간격 추가 (원하면 10~12px도 가능) */
-  margin-top: 10px;
-}
-
 /* ===============================
    📱 모바일 최적화
 ================================= */
@@ -370,8 +370,11 @@ button.submit:hover {
     width: 100%;
   }
 
+  /* ✅ 모바일 전용 이미지 크기 */
   .home-image img {
-    max-width: 180px;
+    max-width: 350px !important;
+    width: auto !important;
+    margin: 0 auto !important;
   }
 
   .user-item {
@@ -382,5 +385,37 @@ button.submit:hover {
   #userList {
     flex-direction: column;
     gap: 6px;
+  }
+/* ===============================
+   🧩 전체 페이지 여백 & 정렬 통합
+================================= */
+main,
+.admin-container,
+#advanced {
+  width: 100%;
+  max-width: 720px; /* 최대 너비 제한 (넓은 화면에서도 중앙 유지) */
+  margin: 0 auto;   /* 자동 중앙 정렬 */
+  padding: 0 20px;  /* 좌우 여백 일정하게 */
+  box-sizing: border-box; /* padding 포함 계산 */
+}
+
+/* ✅ 모든 내부 요소(입력창, 버튼 등) 균등 정렬 */
+form,
+.home-search,
+.user-manage,
+.account-card,
+.account-list {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+/* ✅ 모바일일 때는 여백 자동 줄이기 */
+@media screen and (max-width: 480px) {
+  main,
+  .admin-container,
+  #advanced {
+    max-width: 100%;
+    padding: 0 10px; /* 좌우 여백 줄이기 */
   }
 }

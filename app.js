@@ -1,3 +1,6 @@
+// ==============================
+// 🔧 기본 설정
+// ==============================
 const SERVER_URL = "https://account-storage-p06t.onrender.com";
 
 const pages = {
@@ -17,7 +20,7 @@ const searchButton = homeSearch.querySelector("button");
 
 const form = document.querySelector("form");
 const inputs = form.querySelectorAll("input");
-const selectName = form.querySelector("#userSelect");
+const selectName = document.querySelector("#userSelect");
 const listContainer = document.querySelector(".account-list");
 const pwInput = document.querySelector("#pwInput");
 const togglePw = document.querySelector("#togglePw");
@@ -43,7 +46,7 @@ const closeEditBtn = document.querySelector("#closeEdit");
 let editingId = null;
 
 // ==============================
-// 페이지 전환
+// 📄 페이지 전환
 // ==============================
 function showPage(page) {
   Object.values(pages).forEach((p) => (p.style.display = "none"));
@@ -67,7 +70,7 @@ backToAdminBtn.addEventListener("click", () => showPage("admin"));
 title.addEventListener("click", () => location.reload());
 
 // ==============================
-// 비밀번호 보기
+// 👁️ 비밀번호 보기
 // ==============================
 togglePw.addEventListener("click", () => {
   const type = pwInput.getAttribute("type");
@@ -76,7 +79,7 @@ togglePw.addEventListener("click", () => {
 });
 
 // ==============================
-// 계정 추가
+// 💾 계정 추가
 // ==============================
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -103,7 +106,7 @@ form.addEventListener("submit", async (e) => {
 });
 
 // ==============================
-// 계정 목록
+// 📋 계정 목록
 // ==============================
 async function renderAccounts() {
   const res = await fetch(`${SERVER_URL}/getAccounts`);
@@ -135,7 +138,7 @@ async function renderAdvList() {
 }
 
 // ==============================
-// 계정 삭제
+// 🗑️ 계정 삭제
 // ==============================
 window.confirmDelete = (id) => {
   confirmBox.classList.remove("hidden");
@@ -150,7 +153,7 @@ window.confirmDelete = (id) => {
 };
 
 // ==============================
-// 수정
+// ✏️ 수정
 // ==============================
 window.editAccount = async (id) => {
   const res = await fetch(`${SERVER_URL}/getAccounts`);
@@ -184,7 +187,7 @@ cancelEditBtn.addEventListener("click", () => editModal.classList.add("hidden"))
 closeEditBtn.addEventListener("click", () => editModal.classList.add("hidden"));
 
 // ==============================
-// 사용자 관리 (DB 연동)
+// 👤 사용자 관리 (DB 연동)
 // ==============================
 addUserBtn.addEventListener("click", async () => {
   const name = newUserInput.value.trim();
@@ -225,7 +228,7 @@ window.deleteUser = async (id) => {
 };
 
 // ==============================
-// 검색
+// 🔍 검색
 // ==============================
 searchButton.addEventListener("click", async () => {
   const q = searchInput.value.trim();
@@ -242,6 +245,42 @@ searchButton.addEventListener("click", async () => {
       )
       .join("\n\n")
   );
+});
+
+// ==============================
+// ⌨️ Enter키 작동 추가
+// ==============================
+
+// 홈 페이지 → Enter = 검색 실행
+searchInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    searchButton.click();
+  }
+});
+
+// 관리자 페이지 → Enter = 계정 추가
+form.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    form.querySelector("button.submit").click();
+  }
+});
+
+// 고급 관리자 페이지 → 수정 모달 Enter = 저장
+editModal.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    saveEditBtn.click();
+  }
+});
+
+// 고급 관리자 페이지 → 새 사용자 추가 입력창 Enter = 추가
+newUserInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    addUserBtn.click();
+  }
 });
 
 renderUserList();

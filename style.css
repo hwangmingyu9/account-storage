@@ -57,24 +57,26 @@ main {
   padding-top: 40px;
 }
 
+/* ✅ 검색창을 화면 거의 꽉 채우게 */
 .home-search {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   justify-content: center;
   align-items: center;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 18px 15px;
+  padding: 20px 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  width: 100%;
-  max-width: 380px;
+  width: 95%;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
 .home-search input {
   flex: 1;
-  font-size: 15px;
-  padding: 10px;
+  font-size: 16px;
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 8px;
   outline: none;
@@ -89,8 +91,8 @@ main {
   color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 15px;
+  padding: 12px 20px;
+  font-size: 16px;
   cursor: pointer;
   transition: 0.2s;
 }
@@ -99,16 +101,22 @@ main {
   background: #005fcc;
 }
 
-/* ✅ 홈 이미지 추가 */
+/* ✅ 이미지 중앙 정렬 */
 .home-image {
-  margin-top: 25px;
-  text-align: center;
-}
-.home-image img {
-  max-width: 250px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  border-radius: 10px;
+}
+
+.home-image img {
+  max-width: 220px;
+  width: 100%;
+  border-radius: 12px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  display: block;
+  margin: 0 auto;
 }
 
 /* ===============================
@@ -346,7 +354,17 @@ button.submit:hover {
 @media screen and (max-width: 480px) {
   .home-search {
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
+    width: 92%;
+    max-width: none;
+  }
+
+  .home-search input {
+    width: 100%;
+  }
+
+  .home-image img {
+    max-width: 180px;
   }
 
   .user-item {
@@ -355,9 +373,7 @@ button.submit:hover {
   }
 
   #userList {
-    display: flex;
     flex-direction: column;
     gap: 6px;
-    width: 100%;
   }
 }

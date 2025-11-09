@@ -54,7 +54,7 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 65px; /* 🔹 헤더 간격 통일 */
+  padding-top: 65px; /* 헤더 간격 통일 */
 }
 
 /* ✅ 검색창 박스 */
@@ -66,11 +66,12 @@ main {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 0; /* 완전 각짐 */
-  padding: 24px 24px; /* 🔹 박스 내부 여유 */
+  padding: 24px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   width: 95%;
   max-width: 720px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .home-search input {
@@ -125,11 +126,12 @@ main {
 .admin-container {
   width: 95%;
   max-width: 720px;
-  margin: 65px auto; /* 🔹 헤더 간격 통일 */
+  margin: 65px auto;
   background: #fff;
-  border-radius: 0; /* 완전 각짐 */
+  border-radius: 0;
   box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-  padding: 35px 25px; /* 🔹 내부 여유 증가 */
+  padding: 35px 25px;
+  box-sizing: border-box;
 }
 
 .admin-container h2 {
@@ -238,9 +240,9 @@ button.submit:hover {
 ================================= */
 .account-card {
   background: #fff;
-  border-radius: 0; /* 완전 각짐 */
+  border-radius: 0;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  padding: 20px; /* 내부 여백 증가 */
+  padding: 20px;
   margin-bottom: 15px;
 }
 
@@ -376,25 +378,38 @@ button.submit:hover {
 @media screen and (max-width: 480px) {
   body {
     padding-top: 10px;
+    margin: 0;
+    width: 100%;
+    overflow-x: hidden; /* 🔹 가로 스크롤 방지 */
   }
 
-  main {
-    padding-top: 65px;
-  }
-
-  .admin-container {
-    margin-top: 65px;
-    padding: 32px 22px;
+  main,
+  .admin-container,
+  #advanced {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 12px;
+    box-sizing: border-box;
   }
 
   .home-search {
     flex-direction: column;
-    width: 95%;
-    padding: 24px 20px;
+    gap: 10px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px 16px;
+    box-sizing: border-box;
   }
 
   .home-image img {
-    max-width: 360px;
-    width: auto;
+    max-width: 340px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .account-card {
+    width: 100%;
+    box-sizing: border-box;
   }
 }

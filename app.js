@@ -99,7 +99,7 @@ form.addEventListener("submit", async (e) => {
     });
     form.reset();
     renderAccounts();
-    alert(`${site} 계정이 등록되었습니다 ✅`);
+    alert(`${site} 계정이 정상적으로 등록되었습니다 ✅`);
   } catch {
     alert("❌ 서버 연결 실패");
   }
@@ -236,7 +236,7 @@ searchButton.addEventListener("click", async () => {
   const res = await fetch(`${SERVER_URL}/getAccounts`);
   const data = await res.json();
   const found = data.filter((a) => (a["02_사이트"] || "").includes(q));
-  if (!found.length) return alert(`'${q}' 관련 없음`);
+  if (!found.length) return alert(`'${q}' 해당 검색어 계정 관련 없음`);
   alert(
     found
       .map(

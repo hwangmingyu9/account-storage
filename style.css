@@ -1,0 +1,459 @@
+/* ===============================
+   🔧 기본 설정
+================================= */
+body {
+  margin: 0;
+  font-family: Pretendard, sans-serif;
+  background: #f9fafb;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===============================
+   🔝 상단 헤더
+================================= */
+header {
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* ✅ 메뉴 오른쪽 정렬 */
+nav {
+  margin-left: auto;
+}
+
+header h1 {
+  font-size: 18px;
+  color: #0078ff;
+  margin: 0;
+  cursor: pointer;
+}
+
+nav a {
+  text-decoration: underline;
+  color: #ff0000;
+  font-weight: 600;
+  font-size: 10px !important;
+}
+
+/* ===============================
+   🏠 홈 페이지 + 검색창
+================================= */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.home-search {
+  display: flex;
+  gap: 1px;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 1px;
+  padding: 20px 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 380px;
+}
+
+.home-search input {
+  flex: 1;
+  font-size: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+}
+
+.home-search input:focus {
+  border-color: #0078ff;
+}
+
+.home-search button {
+  background: #0078ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.home-search button:hover {
+  background: #005fcc;
+}
+
+/* ===============================
+   ⚙️ 관리자 / 고급 관리자 공통 컨테이너
+================================= */
+.admin-container {
+  width: 92%;
+  max-width: 390px;
+  margin: 30px auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  padding: 25px 20px;
+}
+
+.admin-container h2 {
+  margin-top: 0;
+  color: #ff0000;
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+/* ===============================
+   📋 입력 폼 & 공통 버튼 스타일
+================================= */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+input, button, select {
+  font-family: inherit;
+}
+
+input[type="text"],
+input[type="password"],
+select {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border 0.2s;
+}
+
+input:focus,
+select:focus {
+  border-color: #0078ff;
+}
+
+/* 🔘 기본 버튼 */
+button.submit {
+  background: #2d3f54;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+  width: 100%;
+}
+
+button.submit:hover {
+  background: #005fcc;
+}
+
+/* ===============================
+   🔐 비밀번호 입력 + 눈모양
+================================= */
+.password-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-box input {
+  flex: 1;
+  padding-right: 40px;
+}
+
+.toggle-eye {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 18px;
+}
+
+/* ===============================
+   🕓 히스토리 리스트
+================================= */
+.history {
+  margin-top: 25px;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.account-list {
+  margin-top: 10px;
+  text-align: left;
+}
+
+.account-list div {
+  padding: 8px 0;
+  border-bottom: 1px solid #f2f2f2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.account-list strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #444;
+  text-align: center;
+}
+
+/* ===============================
+   💾 고급 관리자 페이지 (카드형)
+================================= */
+.card-list {
+  margin-top: 15px;
+}
+
+.account-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.account-card h4 {
+  margin: 0 0 10px 0;
+  color: #0078ff;
+  font-size: 16px;
+}
+
+.account-card p {
+  margin: 3px 0;
+  font-size: 14px;
+}
+
+.card-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* ===============================
+   👤 사용자 이름 관리 섹션
+================================= */
+.user-manage {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column; /* 세로로 쌓이게 */
+  align-items: stretch;
+  gap: 6px;
+}
+
+.user-manage div {
+  display: flex;
+  flex-direction: row; /* 이름-삭제 가로 배치 */
+  justify-content: space-between; /* 이름 왼쪽 / 삭제 오른쪽 */
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 8px 6px;
+  font-size: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 🔹 삭제 버튼 */
+.user-manage div button {
+  background: #ff3b30;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s;
+  min-width: 50px; /* 🔹 최소 너비 (원하면 더 줄여도 됨) */
+}
+
+.user-manage div button:hover {
+  background: #2d3f54;
+}
+
+/* 🔹 추가 버튼 */
+.user-manage button#addUserBtn {
+  padding: 7px 10px;
+  border: none;
+  border-radius: 8px;
+  background: #ff0303;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+  width: 100%;
+}
+
+.user-manage button#addUserBtn:active {
+  background: #2d3f54;
+}
+
+/* ===============================
+   ⚠️ 삭제 확인창
+================================= */
+#confirmBox {
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#confirmBox.hidden {
+  display: none;
+}
+
+.confirm-content {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.confirm-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.confirm-buttons button {
+  width: 45%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+#confirmDelete {
+  background: #ff3b30;
+  color: white;
+}
+
+#cancelDelete {
+  background: #ccc;
+  color: #333;
+}
+
+/* ===============================
+   📱 모바일 최적화 (390×844)
+================================= */
+@media screen and (max-width: 400px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  header h1 {
+    font-size: 30px;
+  }
+
+  nav a {
+    font-size: 14px;
+  }
+
+  .admin-container {
+    width: 90%;
+    padding: 20px 18px;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  select,
+  button.submit {
+    font-size: 11px;
+    padding: 7px;
+  }
+
+  .account-card {
+    padding: 12px;
+  }
+
+  .account-card h4 {
+    font-size: 15px;
+  }
+
+/* ✅ 삭제 버튼만 따로 조정 */
+.user-manage div button.submit {
+  width: auto !important;  /* 전체 버튼 100% 적용 무시 */
+  padding: 4px 10px;       /* 삭제 버튼 크기 줄이기 */
+  min-width: 70px;         /* 최소 길이 (필요시 조정 가능) */
+  font-size: 13px;
+}
+
+/* ✅ 사용자 이름 줄 세로 정렬 고정 */
+.user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 8px 6px;
+  font-size: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ✅ 삭제 버튼 */
+.user-item button.delete-btn {
+  background: #ff3b30;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.user-item button.delete-btn:hover {
+  background: #2d3f54;
+}
+
+/* ✅ 사용자 리스트 전체 세로 정렬 강제 */
+#userList {
+  display: flex;
+  flex-direction: column; /* 이름 줄이 아래로 쌓이게 */
+  gap: 6px;               /* 줄 간격 */
+  width: 100%;
+}
+
+/* ✅ 추가 버튼과 아래 버튼 간격 조정 */
+#addUserBtn {
+  margin-bottom: -10px; /* 🔹 숫자를 줄이면 간격이 좁아짐 */
+}
+
+
+
+

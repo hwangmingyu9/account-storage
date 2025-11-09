@@ -54,10 +54,10 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 70px; /* 🔹 전체적으로 조금 내려줌 */
+  padding-top: 65px; /* 🔹 헤더 간격 통일 */
 }
 
-/* ✅ 검색창 (양옆 가득 채움) */
+/* ✅ 검색창 박스 */
 .home-search {
   display: flex;
   gap: 10px;
@@ -65,20 +65,20 @@ main {
   align-items: center;
   background: #fff;
   border: 1px solid #ddd;
-  border-radius: 0;
-  padding: 20px;
+  border-radius: 0; /* 완전 각짐 */
+  padding: 24px 24px; /* 🔹 박스 내부 여유 */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  width: 98%;
-  max-width: 1000px;
+  width: 95%;
+  max-width: 720px;
   margin: 0 auto;
 }
 
 .home-search input {
   flex: 1;
   font-size: 16px;
-  padding: 14px;
+  padding: 12px;
   border: 1px solid #ccc;
-  border-radius: 0;
+  border-radius: 8px;
   outline: none;
 }
 
@@ -90,8 +90,8 @@ main {
   background: #0078ff;
   color: #fff;
   border: none;
-  border-radius: 0;
-  padding: 14px 22px;
+  border-radius: 8px;
+  padding: 12px 20px;
   font-size: 16px;
   cursor: pointer;
   transition: 0.2s;
@@ -101,7 +101,7 @@ main {
   background: #005fcc;
 }
 
-/* ✅ 이미지 중앙 정렬 */
+/* ✅ 이미지 */
 .home-image {
   margin-top: 30px;
   display: flex;
@@ -113,7 +113,7 @@ main {
 .home-image img {
   max-width: 500px;
   width: 100%;
-  border-radius: 0;
+  border-radius: 12px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
   display: block;
   margin: 0 auto;
@@ -123,13 +123,13 @@ main {
    ⚙️ 관리자 / 고급 관리자 공통
 ================================= */
 .admin-container {
-  width: 98%;
-  max-width: 1000px;
-  margin: 70px auto;
+  width: 95%;
+  max-width: 720px;
+  margin: 65px auto; /* 🔹 헤더 간격 통일 */
   background: #fff;
-  border-radius: 0;
+  border-radius: 0; /* 완전 각짐 */
   box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-  padding: 35px 25px;
+  padding: 35px 25px; /* 🔹 내부 여유 증가 */
 }
 
 .admin-container h2 {
@@ -137,7 +137,7 @@ main {
   color: #ff0000;
   text-align: center;
   font-size: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 /* ===============================
@@ -146,20 +146,19 @@ main {
 form {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 input, button, select {
   font-family: inherit;
-  border-radius: 0;
 }
 
 input[type="text"],
 input[type="password"],
 select {
   border: 1px solid #ccc;
-  border-radius: 0;
-  padding: 13px;
+  border-radius: 8px;
+  padding: 12px;
   font-size: 15px;
   width: 100%;
   box-sizing: border-box;
@@ -175,8 +174,8 @@ button.submit {
   background: #2d3f54;
   color: white;
   border: none;
-  border-radius: 0;
-  padding: 13px;
+  border-radius: 8px;
+  padding: 12px;
   font-size: 15px;
   cursor: pointer;
   transition: 0.2s;
@@ -239,25 +238,10 @@ button.submit:hover {
 ================================= */
 .account-card {
   background: #fff;
-  border-radius: 0;
+  border-radius: 0; /* 완전 각짐 */
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  padding: 20px;
-  margin-bottom: 20px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.account-card h4 {
-  margin: 0 0 10px 0;
-  color: #0078ff;
-  font-size: 16px;
-}
-
-.card-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 10px;
+  padding: 20px; /* 내부 여백 증가 */
+  margin-bottom: 15px;
 }
 
 /* ===============================
@@ -286,7 +270,7 @@ button.submit:hover {
   background: #ff3b30;
   color: white;
   border: none;
-  border-radius: 0;
+  border-radius: 6px;
   padding: 5px 12px;
   font-size: 13px;
   cursor: pointer;
@@ -308,9 +292,9 @@ button.submit:hover {
 ================================= */
 #confirmBox {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; 
+  left: 0; 
+  right: 0; 
   bottom: 0;
   background: rgba(0,0,0,0.4);
   display: flex;
@@ -326,7 +310,7 @@ button.submit:hover {
 .confirm-content {
   background: #fff;
   padding: 25px;
-  border-radius: 0;
+  border-radius: 10px;
   width: 80%;
   max-width: 320px;
   text-align: center;
@@ -343,7 +327,7 @@ button.submit:hover {
   width: 45%;
   padding: 10px;
   border: none;
-  border-radius: 0;
+  border-radius: 6px;
   font-size: 15px;
   cursor: pointer;
 }
@@ -386,113 +370,31 @@ button.submit:hover {
   position: relative;
 }
 
-.edit-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.edit-header h3 {
-  margin: 0;
-  font-size: 18px;
-  color: #333;
-}
-
-.close-btn {
-  font-size: 20px;
-  cursor: pointer;
-  color: #888;
-  transition: 0.2s;
-}
-
-.close-btn:hover {
-  color: #ff3b30;
-}
-
-.edit-box input {
-  display: block;
-  width: 100%;
-  margin-bottom: 12px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 0;
-  font-size: 15px;
-}
-
-.edit-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-
-#saveEdit {
-  background: #0078ff;
-  color: #fff;
-  border: none;
-  border-radius: 0;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-#cancelEdit {
-  background: #ccc;
-  color: #333;
-  border: none;
-  border-radius: 0;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
 /* ===============================
    📱 모바일 최적화
 ================================= */
 @media screen and (max-width: 480px) {
-  .home-search {
-    flex-direction: column;
-    width: 96%;
-    max-width: none;
-  }
-
-  .home-image {
-    margin-top: 15px;
-  }
-
   body {
-    padding-top: 20px;
+    padding-top: 10px;
   }
 
-  main,
-  .admin-container,
-  #advanced {
-    margin-top: 25px;
-    width: 96%;
+  main {
+    padding-top: 65px;
   }
 
   .admin-container {
-    padding: 28px 18px;
+    margin-top: 65px;
+    padding: 32px 22px;
   }
-}
 
-/* ===============================
-   🧩 전체 페이지 여백 & 정렬 통합
-================================= */
-main,
-.admin-container,
-#advanced {
-  width: 98%;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
+  .home-search {
+    flex-direction: column;
+    width: 95%;
+    padding: 24px 20px;
+  }
 
-form,
-.home-search,
-.user-manage,
-.account-card,
-.account-list {
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0 auto;
+  .home-image img {
+    max-width: 360px;
+    width: auto;
+  }
 }

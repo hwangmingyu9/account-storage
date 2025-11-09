@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
+import path from "path";
+import { fileURLToPath } from "url";
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
@@ -14,6 +16,13 @@ import {
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+
+// ✅ __dirname 설정 (ESM에서 필수)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// ✅ 정적 파일(index.html, style.css, app.js 등) 제공
+app.use(express.static(__dirname));
 
 // ✅ Firebase 연결
 const firebaseConfig = {
@@ -64,6 +73,11 @@ app.delete("/deleteAccount/:id", async (req, res) => {
     console.error("❌ 삭제 실패:", e);
     res.status(500).json({ error: "삭제 실패" });
   }
+});
+
+// ✅ 기본 경로("/") 접근 시 index.html 반환
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 // ✅ Render 환경 포트 대응

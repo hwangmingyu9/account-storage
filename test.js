@@ -1,7 +1,7 @@
 // ==============================
 // 🔧 기본 설정
 // ==============================
-const SERVER_URL = "https://YOUR_RENDER_URL_HERE"; // Render 배포 주소로 바꿔
+const SERVER_URL = "https://account-storage-p06t.onrender.com"; // Render 배포 주소로 바꿔
 
 const pages = {
   home: document.querySelector("#home"),
